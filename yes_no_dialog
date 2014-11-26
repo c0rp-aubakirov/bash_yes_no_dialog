@@ -5,7 +5,7 @@ usage() {
 	echo "Usage: $0 [OPTIONS]
 	-x		force to use GUI dialog
 	-m <string>	message that user will see" 1>&2
-	exit 1;
+	return 1;
 }
 
 while getopts m:xh opts; do
@@ -49,4 +49,3 @@ yes_no_dialog(){
 		fi
 	done;
 }
-yes_no_dialog "$@"
