@@ -1,0 +1,50 @@
+#!/bin/bash
+
+usage() { echo "Usage: $0 [-x force to use GUI dialog] [-m <string>, message that user will see]" 1>&2; exit 1; }
+
+while getopts hm:x opts; do
+	case ${opts} in
+		x) FORCE_GUI=true; echo "GUI" >&1
+			;;
+		m) MSG=${OPTARG}
+			;;
+		h) usage
+			;;
+	esac
+done
+
+if [ -z $MSG ];then
+	usage
+fi
+
+# Yes/no dialog. The first argument is the message that the user will see.
+# If the user enters n/N, send return 1.
+yes_no_dialog(){
+	local MSG="$@"
+	while true; do
+		if [ -z $FORCE_GUI]; then
+			read -p "$MSG" yn
+			if [ "$yn" = "" ]; then
+				yn='Y'
+			fi
+			case "$yn" in
+				[Yy] )
+					return 0;;
+				[Nn] )
+					echo "Aborting..." >&1
+					return 1;;
+				* )
+					echo "Please answer y or n for yes or no.";;
+			esac
+		else
+			if [ -z $DISPLAY ]; then echo "DISPLAY variable is not set" >&1 ; exit 1; fi
+			if zenity --question --text="$MSG" --ok-label=Yes --cancel-label=No; then
+					return 0
+			else
+					echo "Aborting..." >&1
+					return 1
+			fi
+		fi
+	done;
+}
+yes_no_dialog "$@"
