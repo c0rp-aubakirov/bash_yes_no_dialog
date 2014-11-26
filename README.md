@@ -5,7 +5,7 @@ yes/no dialog for linux
 
 ### Dependencies
 
-Script use `[zenity](http://manpages.ubuntu.com/manpages/trusty/en/man1/zenity.1.html)` for GUI dialogs.
+Script use [zenity](http://manpages.ubuntu.com/manpages/trusty/en/man1/zenity.1.html) for GUI dialogs.
 
 ### Installation:
 
