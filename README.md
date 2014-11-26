@@ -5,7 +5,7 @@ yes/no dialog for linux
 
 Installation:
 
-Add `yes_no_dialog` to your PATH
+Add `[yes_no_dialog](https://github.com/c0rp-aubakirov/bash_yes_no_dialog/blob/master/yes_no_dialog)` to your PATH
 
 Usage:
 
