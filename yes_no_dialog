@@ -20,6 +20,7 @@ while getopts m:xh opts; do
 done
 
 if [ -z "$MSG" ];then
+	echo "ERROR: Message not specified" >&1
 	usage
 fi
 
