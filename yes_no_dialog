@@ -23,8 +23,8 @@ if [ -z "$MSG" ];then
 	usage
 fi
 
-# Yes/no dialog. The first argument is the message that the user will see.
-# If the user enters n/N, send return 1.
+# Yes/no dialog. 
+# If the user enters n/N, return 1.
 while true; do
 	if [ -z $FORCE_GUI ]; then
 		read -p "$MSG" yn
