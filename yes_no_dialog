@@ -1,10 +1,16 @@
 #!/bin/bash
 
-usage() { echo "Usage: $0 [-x force to use GUI dialog] [-m <string>, message that user will see]" 1>&2; exit 1; }
+usage() { 
+	echo "Show yes/no dialog, returns 0 or 1 depending on user answer"
+	echo "Usage: $0 [OPTIONS]
+	-x		force to use GUI dialog
+	-m <string>	message that user will see" 1>&2
+	exit 1;
+}
 
-while getopts hm:x opts; do
+while getopts m:xh opts; do
 	case ${opts} in
-		x) FORCE_GUI=true; echo "GUI" >&1
+		x) FORCE_GUI=true;
 			;;
 		m) MSG=${OPTARG}
 			;;
@@ -20,13 +26,9 @@ fi
 # Yes/no dialog. The first argument is the message that the user will see.
 # If the user enters n/N, send return 1.
 yes_no_dialog(){
-	local MSG="$@"
 	while true; do
-		if [ -z $FORCE_GUI]; then
+		if [ -z $FORCE_GUI ]; then
 			read -p "$MSG" yn
-			if [ "$yn" = "" ]; then
-				yn='Y'
-			fi
 			case "$yn" in
 				[Yy] )
 					return 0;;
